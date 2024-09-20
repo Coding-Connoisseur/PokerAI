@@ -47,7 +47,7 @@ This project is a comprehensive AI-powered poker-playing system that combines **
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/ai-poker-player.git
+   git clone https://github.com/Coding-Connoisseur/ai-poker-player.git
    cd ai-poker-player
    ```
 
