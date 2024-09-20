@@ -115,4 +115,5 @@ poker_ai_project/
 │   │   ├── initialize_agent()               # Loads trained models or starts fresh
 │   │   ├── play_game()                      # Starts and runs the poker-playing AI in real-time
 │
+└── .env                                     # File for securely managing sensitive information like API keys instead of hardcoding them in settings.py
 └── README.md                                # Project overviewHere is the **fully comprehensive, modular, and scalable file structure** for your poker-playing AI project, with all folders, files, classes, and functions thoroughly described:
