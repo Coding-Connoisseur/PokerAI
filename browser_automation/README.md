@@ -1,4 +1,4 @@
-Based on the provided **README.md** and **fileStructure.txt**, here's an enhanced **browser_automation/README.md** that integrates the logic and capabilities from the overall project context, focusing on robust interaction with poker platforms, scalability, and real-time decision-making.
+Here is the entire updated **browser_automation/README.md** with the added sections for **Logging and Monitoring** and **Dependency Management**:
 
 ---
 
@@ -44,6 +44,19 @@ To minimize delay between AI decisions and browser actions, the automation modul
 ### 5. **Automated Testing**
 This module incorporates automated testing scripts to ensure the reliability of interactions across different poker platforms. Unit and integration tests validate browser actions, error handling, and game state detection, helping developers identify and resolve issues quickly.
 
+### 6. **Logging and Monitoring**
+The browser automation system includes automated logging and monitoring capabilities. It captures and logs every browser interaction, including actions taken by the AI (e.g., placing bets, folding), errors encountered, and performance metrics (e.g., response time for actions). These logs are vital for debugging, performance tracking, and ensuring smooth long-term operation of the automation.
+
+- **Error Logging**: Captures details of any errors encountered during gameplay, including page load issues, element detection failures, and browser crashes.
+- **Performance Metrics**: Monitors key performance metrics, such as action execution time, page response time, and the number of successful interactions, to ensure the system operates within acceptable limits.
+- **Real-Time Monitoring**: Includes real-time logging to track AI actions and browser responses as they occur, providing insights into game flow and detecting potential issues early.
+
+### 7. **Dependency Management**
+Managing browser driver dependencies is critical for ensuring compatibility between the automation scripts and the browser used for gameplay. The system includes automatic checks for browser driver versions (e.g., ChromeDriver, GeckoDriver) and updates them to match the installed browser version, preventing compatibility issues that could disrupt gameplay.
+
+- **Driver Versioning**: The module ensures that browser drivers (like ChromeDriver) are kept up to date with the latest browser versions, avoiding mismatches that can lead to automation failures.
+- **Cross-Browser Compatibility**: While primarily focused on Chrome and Firefox, the module can be extended to support other browsers by adding the appropriate drivers and adapting the automation logic.
+
 ## Future Improvements
 
 - **Platform Adaptability**: Expand the browser automation module to support a broader range of online poker platforms, ensuring compatibility and adaptability for different site layouts and structures.
@@ -58,5 +71,7 @@ This module incorporates automated testing scripts to ensure the reliability of 
 
 ---
 
-The browser automation module is a critical component of the PokerAI system, enabling seamless integration between AI decision-making and real-time poker platforms. With robust error handling, multi-table support, and real-time decision execution, it forms the backbone of AI-driven poker gameplay.
+The browser automation module is a critical component of the PokerAI system, enabling seamless integration between AI decision-making and real-time poker platforms. With robust error handling, multi-table support, real-time decision execution, logging, and monitoring, it forms the backbone of AI-driven poker gameplay.
+
+--- 
 
