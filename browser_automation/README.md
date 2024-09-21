@@ -1,98 +1,82 @@
 # Browser Automation Module
 
-This module contains scripts and utilities to automate browser-based interactions on online poker platforms. It enables the PokerAI to autonomously play poker by simulating user input, detecting game states, and making real-time decisions during gameplay. This system integrates tightly with the reinforcement learning (RL) agent and strategy engine to allow for efficient and intelligent play.
+This module automates browser-based interactions on online poker platforms, allowing the PokerAI to simulate user input, read game states, and make real-time decisions. It works in tandem with the Reinforcement Learning (RL) agent, Strategy Engine, and NLP Chat module to deliver a seamless poker-playing experience.
 
 ## Directory Structure
 
-- **`/actions`**: Scripts that handle specific browser actions such as clicking buttons, entering values into fields, and navigating pages. These actions are reusable and can be combined to automate complex interactions.
-  - **`click_button.py`**: Simulates a click event on a specific button within the browser.
-  - **`enter_text.py`**: Automates typing into input fields, for example, entering messages in the chat box.
-  - **`navigate.py`**: Navigates between pages or screens on the poker platform, such as moving from the game lobby to a specific table.
+- **`/actions`**: Defines atomic actions the AI can take, such as clicking buttons or entering text. Each action is reusable and modular.
+  - **`click_button.py`**: Simulates button clicks within the browser.
+  - **`enter_text.py`**: Automates typing into input fields, like poker chat or bet boxes.
+  - **`navigate.py`**: Handles page transitions, such as moving from the lobby to a table.
 
-- **`/drivers`**: Browser drivers (e.g., ChromeDriver, GeckoDriver) required for Selenium to control the browser. Each driver corresponds to a supported browser like Chrome or Firefox.
-  - **`chrome_driver.exe`**: Chrome browser driver executable used for automation.
-  - **`firefox_driver.exe`**: Firefox browser driver executable.
+- **`/drivers`**: Contains browser driver executables needed for Selenium to control the browser (ChromeDriver, GeckoDriver).
+  - **Example**: For Chrome:
+    ```bash
+    python -m webdriver_manager.chrome
+    ```
+    Reference: [WebDriver Manager Documentation](https://github.com/SergeyPirogov/webdriver_manager)
 
-- **`/scripts`**: Contains automation scripts that perform higher-level actions, such as joining a game, placing a bet, or reading the current state of a poker game.
-  - **`enter_game.py`**: Automates the process of selecting and joining a poker table.
-  - **`place_bet.py`**: Takes betting instructions from the strategy engine and simulates the bet placement in the browser.
-  - **`read_game_state.py`**: Scrapes data from the screen to get the current game state, including the AI’s hand, community cards, opponent actions, and pot size.
+- **`/scripts`**: Contains Selenium scripts that perform complex actions, such as joining games or placing bets.
+  - **`enter_game.py`**: Automates table selection and joining.
+  - **`place_bet.py`**: Reads AI’s decisions from the strategy engine and places corresponding bets.
+  - **`read_game_state.py`**: Scrapes in-game data (cards, pot size, opponent actions) and passes it to the RL agent.
 
-- **`/helpers`**: Utility scripts to support the browser automation process, including wait mechanisms, error handling, and data extraction.
-  - **`wait_for_element.py`**: Implements functions that wait for specific elements (e.g., a button or game state indicator) to become visible or clickable.
-  - **`take_screenshot.py`**: Captures screenshots of the browser during gameplay, useful for debugging and tracking game state visually.
-  - **`handle_popups.py`**: Detects and handles browser popups, such as advertisements or error messages, which may interrupt gameplay.
+- **`/helpers`**: Contains utility scripts for error handling and logging.
+  - **`wait_for_element.py`**: Pauses execution until a specific web element is visible.
+  - **`handle_popups.py`**: Detects and dismisses popups to avoid interruptions during gameplay.
 
 ## Key Features and Enhancements
 
-### 1. **Robust Game State Detection**
-The browser automation scripts now include improved mechanisms for detecting critical game elements. With enhanced element selectors and fallback mechanisms, the AI is better equipped to recognize and react to different poker platform layouts. This ensures the system can adapt to changes in the platform's HTML structure and still function effectively.
+### 1. **Integration with Strategy Engine and RL Agent**
+- **Strategy Engine**: Provides decision logic for actions (e.g., betting, folding) based on game state and opponent profiling. See [Strategy Engine README](../strategy_engine/README.md) for details.
+- **Reinforcement Learning**: Ensures decisions made by the AI are data-driven and adaptive over time. Learn more in the [RL Module README](../rl_module/README.md).
 
 ### 2. **Error Handling and Recovery**
-The module incorporates advanced error handling, with retry logic and page reload mechanisms. This ensures that if the browser crashes or an unexpected issue occurs (e.g., a disconnection or site layout change), the system can recover automatically and resume gameplay without human intervention.
+If an error occurs (e.g., browser crash), the module retries the action, reloads the page, or restarts the game session. This ensures robustness in real-time gameplay.
 
 ### 3. **Multi-Table Support**
-One of the new features is the ability to handle multiple poker tables simultaneously. The browser automation can open and manage several tables in different browser tabs or windows, tracking each game independently while interacting with them according to the AI’s decisions.
+New multi-table functionality allows PokerAI to handle several tables at once, with each session managed in a separate browser window.
 
-### 4. **Real-Time Decision Making**
-The interaction between the browser automation and the strategy engine has been optimized to ensure that the AI’s decisions are executed with minimal latency. By integrating tightly with the RL agent, the system ensures that actions like raising, folding, or bluffing are performed promptly, giving the AI a competitive edge in fast-paced games.
+### 4. **Automated Testing**
+Automated tests verify browser interactions, from joining a game to handling complex in-game scenarios. See the [Tests README](../tests/README.md) for more information on test coverage.
 
-### 5. **Automated Testing for Browser Interactions**
-Automated tests have been introduced to cover key browser automation tasks, ensuring the system works reliably across various platforms. These tests simulate typical poker interactions as well as edge cases, helping to validate the system’s robustness. By running these tests regularly, developers can detect issues early and ensure consistent performance across updates.
+### 5. **Real-Time Decision Making**
+Interacts closely with the Strategy Engine and RL agent, ensuring decisions such as bluffing, folding, or raising are executed instantly based on the game state.
 
-### 6. **Cross-Browser Compatibility** *(New Feature)*
-Support for multiple browsers such as Chrome, Firefox, Safari, and Edge has been expanded. This allows the AI to operate on a broader range of platforms, ensuring flexibility and resilience across different environments.
+## Usage Examples
 
-### 7. **Dynamic UI Adaptation** *(New Feature)*
-Introduced a dynamic UI adaptation system that automatically adjusts the browser interaction scripts to handle minor changes in poker platform layouts. This ensures that small HTML changes do not disrupt gameplay.
+### Start a Poker Session:
+To begin a poker session, where the AI automates table entry and decision-making, run the following:
 
-### 8. **Headless Browser Support** *(New Feature)*
-Implemented headless browser support for running the automation in a browser without a graphical interface, which is useful for deployment on servers and cloud environments.
-
-### 9. **Mobile Browser Support** *(New Feature)*
-Extended automation support for mobile browsers, enabling the PokerAI to play on mobile-optimized poker platforms via emulated or real mobile browsers.
-
-### 10. **AI-Assisted Element Detection** *(New Feature)*
-Integrated an AI-based element detection mechanism that improves accuracy in identifying and interacting with dynamic web elements, reducing errors in complex layouts.
-
-## Usage
-
-### 1. **Installation**
-Ensure that you have installed all dependencies, including Selenium and the appropriate browser drivers. Install them by running the following command from the project root:
-
-```bash
-pip install -r requirements.txt
-```
-
-You also need to download the relevant browser drivers (e.g., ChromeDriver or GeckoDriver) and place them in the `/drivers` directory.
-
-### 2. **Running Scripts**
-To automate specific actions on the poker platform, run the relevant scripts. For example:
-- To join a poker game:
 ```bash
 python scripts/enter_game.py
 ```
-- To place a bet:
+
+### Place a Bet:
+Once the AI has evaluated its hand strength and decided on a bet:
+
 ```bash
 python scripts/place_bet.py
 ```
-- To read the current game state:
+
+### Read Game State:
+To capture and log the current poker game state (cards, pot size, player actions):
+
 ```bash
 python scripts/read_game_state.py
 ```
 
-### 3. **Monitoring and Debugging**
-Monitor the logs and screenshots generated during gameplay. For debugging, the `take_screenshot.py` script captures the browser’s state at critical points, and log files help trace actions and errors during execution.
-
-### 4. **Running Multi-Table Games**
-To enable multi-table support, modify the configuration in `env_config.yaml` to allow multiple windows or tabs. Each browser session will be managed independently, and the AI will track and make decisions for all open tables simultaneously.
+## Cross-Referencing Other Modules
+- **Reinforcement Learning Module**: For how the AI learns and adapts its strategy, refer to the [RL Module README](../rl_module/README.md).
+- **NLP Chat Module**: Learn how the AI engages in human-like poker chat interactions in the [NLP Chat README](../nlp_chat/README.md).
+- **Strategy Engine**: Detailed strategy logic, including bluffing and pot odds calculation, is covered in the [Strategy Engine README](../strategy_engine/README.md).
 
 ## Future Enhancements
 
-- **Advanced Game State Detection**: Incorporating machine learning-based image recognition to improve the accuracy of game state detection, especially for more dynamic or complex poker platforms.
-- **Enhanced Real-Time Analytics**: Introduce real-time analytics to monitor and adjust the AI’s behavior during gameplay.
-- **Automated Browser Recovery**: Further improve browser recovery mechanisms, allowing the AI to seamlessly switch to a backup browser session if the primary session fails during gameplay.
+- **Advanced Game State Detection**: Using machine learning for image recognition to improve element detection accuracy on dynamic poker platforms.
+- **Cross-Browser Compatibility**: Expand to support more browsers like Edge or Safari to increase flexibility.
+- **Mobile Browser Support**: Adding support for mobile poker platforms through browser emulation.
 
 ---
 
-The **browser_automation** module is crucial for enabling PokerAI to operate autonomously on live poker platforms. Its enhancements ensure better adaptability, robustness, and scalability, making it suitable for real-world, fast-paced poker environments.
+The **browser_automation** module is vital for enabling PokerAI to interact with live poker platforms, ensuring it functions autonomously in real-time environments while seamlessly integrating with other key components of the system.
