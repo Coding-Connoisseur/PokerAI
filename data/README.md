@@ -1,47 +1,62 @@
 # Data Directory
 
-This directory contains all the data required for training, testing, and evaluating the PokerAI model. It holds datasets related to poker hand histories, RL agent performance metrics, opponent profiling information, and game state logs. The data stored here plays a crucial role in improving the AI's decision-making capabilities and provides the foundation for reinforcement learning and strategy optimization.
+This directory contains all data essential for training, testing, and evaluating the PokerAI model. These datasets include poker hand histories, game logs, opponent profiling data, and performance metrics. The data is used to enhance decision-making capabilities, providing a solid foundation for reinforcement learning and strategic optimization.
 
 ## Directory Structure
 
-- **`/hand_history/`**: This folder stores raw and processed hand history data from various poker games. Hand histories contain detailed information about past games, including cards dealt, player actions, pot sizes, and outcomes. This data is used for:
-  - **Training the RL Agent**: By feeding historical data to the RL model, the AI can learn from real-world scenarios.
-  - **Strategy Refinement**: Hand history data is analyzed to adjust the AI's betting strategies and opponent profiling.
-  - **Opponent Insights**: Historical games are used to develop opponent models that predict behaviors based on past actions.
+- **`/hand_history/`**: Stores both raw and processed hand history data from poker games. The data is used to train the AI and refine its strategy over time.
+  - **`hand_history_samples.json`**: Sample hand history data for training and testing.
+  
+- **`/game_state_logs/`**: Logs in-game events such as player hands, pot size, and player actions. These logs are crucial for tracking real-time states during training and simulations.
+  - **`game_state_log.csv`**: Records the AI’s decisions and game states during training for later analysis.
+  
+- **`/opponent_profiles/`**: Contains data on opponent behaviors, betting tendencies, and general statistics that allow the AI to adjust its strategy.
+  - **`opponent_stats.csv`**: Aggregated statistics of opponent behavior (aggression, folding frequency, etc.).
+  
+- **`/training_metrics/`**: Stores metrics generated during reinforcement learning training, such as rewards, win rates, and Q-values.
+  - **`training_performance.csv`**: Logs the agent's progress over episodes.
 
-- **`/game_state_logs/`**: Logs of in-game events captured in real-time during the AI's interactions with poker platforms. These files are critical for tracking the current state of the game and include information such as:
-  - **Player Hands**: The cards each player holds at any given time.
-  - **Pot Size**: The total amount of chips in play.
-  - **Action Logs**: A sequence of actions taken by all players in the game (betting, folding, raising, etc.).
-  - **Outcomes**: The final results of the hand, including winners, hand rankings, and chip distributions.
-  - **Training Feedback**: Captures the reward feedback that informs the reinforcement learning model to improve its decision-making.
+## Cross-Referencing
 
-- **`/opponent_profiles/`**: This folder contains data that profiles the playing styles and tendencies of various opponents. Based on previous games, the AI builds predictive models to categorize opponents as aggressive, passive, or neutral. Key files include:
-  - **Player Statistics**: Aggregated data on opponents' betting patterns, frequency of raises, bluffs, and folds.
-  - **Profile Summaries**: High-level summaries of different opponent types, which are used by the AI to adjust its strategies in real-time.
+Each data submodule directly impacts components across the PokerAI system. Below are links to key related modules:
+  
+- **Reinforcement Learning Module (`rl_module/`)**: Utilizes the **`hand_history`** data and **`training_metrics`** for agent training. Learn more in the [RL Module README](../rl_module/README.md).
+- **Strategy Engine (`strategy_engine/`)**: Uses **opponent profiling** and **game state logs** to refine strategic decision-making. See the [Strategy Engine README](../strategy_engine/README.md).
+- **Browser Automation Module (`browser_automation/`)**: Reads real-time game state data for interaction with live poker platforms. Read the full description [here](../browser_automation/README.md).
+- **NLP Chat Module (`nlp_chat/`)**: For bluffing or influencing opponents, the AI uses behavioral data from **opponent profiling**. Check the [NLP Chat README](../nlp_chat/README.md).
 
-- **`/training_metrics/`**: Contains logs and performance metrics from the training of the RL agent. These files track the agent’s progress over time, helping to fine-tune learning rates and exploration strategies. Metrics include:
-  - **Win Rates**: Tracks how often the AI wins based on different strategies and game conditions.
-  - **Q-Values**: Records the Q-values learned by the agent during training, which guide decision-making.
-  - **Cumulative Rewards**: Measures the total rewards accumulated by the RL agent over time, which is a key performance indicator for the AI’s learning efficiency.
+## Key Configurations and Their Impact
 
-- **`/datasets/`**: This folder holds any external datasets used for training or testing purposes. It might include:
-  - **Synthetic Data**: Simulated poker games used to pre-train the RL agent before deploying it on live games.
-  - **Test Cases**: Specific hand scenarios or poker situations used to evaluate the AI's decision-making accuracy.
+1. **Hand History Data**: Directly influences how the RL agent is trained. The accuracy and diversity of this dataset are critical for ensuring that the AI can handle a wide range of game situations.
+2. **Opponent Profiles**: Real-time adjustment of AI strategy is driven by opponent tendencies, captured in this dataset. This profiling ensures that the AI can adapt to different types of opponents (aggressive, passive, etc.) during gameplay.
+3. **Game State Logs**: Helps to identify trends in the AI’s decision-making, allowing developers to track its performance and optimize strategies in future updates.
 
-## Usage
+## Usage Examples
 
-1. **Hand History Analysis**: Load hand history data to feed into the AI’s training process and strategy refinement.
-2. **Game State Tracking**: Use real-time game logs to monitor and update the AI's knowledge of the current game state.
-3. **Opponent Profiling**: Extract and analyze opponent tendencies from the profiling data to enhance real-time decision-making.
-4. **Training Monitoring**: Access training metrics to evaluate and adjust the RL agent’s performance.
+1. **Training with Hand History Data**:
+   To initiate training with a hand history dataset, use the following command:
+   ```bash
+   python rl_module/train.py --input data/hand_history/hand_history_samples.json
+   ```
 
-## Data Flow
+2. **Analyzing Opponent Profiles**:
+   Run the following command to analyze opponent profiling and update strategies:
+   ```bash
+   python strategy_engine/analyze_opponents.py --input data/opponent_profiles/opponent_stats.csv
+   ```
 
-1. **Hand histories and game logs** feed directly into the RL model for training.
-2. **Opponent profiles** are updated continuously based on real-time game events, informing strategy.
-3. **Training metrics** guide iterative adjustments to the AI’s parameters, helping optimize performance.
+3. **Logging Game States**:
+   The AI records in-game events in real-time, which can be viewed as follows:
+   ```bash
+   python rl_module/log_game_state.py --output data/game_state_logs/game_state_log.csv
+   ```
+
+## Future Enhancements
+
+- **Data Augmentation**: Plan to generate synthetic hand histories to further train the RL agent on rare poker scenarios.
+- **Advanced Opponent Profiling**: Machine learning will be integrated to create dynamic opponent profiles based on evolving behavioral patterns.
+- **Multi-Platform Support**: Enable cross-platform game state logs to enhance data diversity.
 
 ---
 
-This directory forms the backbone of data-driven decision-making and learning for the PokerAI.
+This directory plays a foundational role in improving the PokerAI’s decision-making through structured datasets and logs that feed into the various learning and strategic components of the project.
