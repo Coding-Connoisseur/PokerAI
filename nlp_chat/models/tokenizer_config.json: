@@ -1,0 +1,18 @@
+{
+  "tokenizer_type": "GPT2Tokenizer",
+  "vocab_size": 50257,
+  "model_max_length": 1024,
+  "padding_side": "right",
+  "truncation_side": "right",
+  "special_tokens": {
+    "bos_token": "<|startoftext|>",
+    "eos_token": "<|endoftext|>",
+    "pad_token": "<|pad|>"
+  },
+  "lowercase": false,
+  "add_prefix_space": true,
+  "unk_token": "<|unk|>",
+  "sep_token": "<|sep|>",
+  "cls_token": "<|cls|>",
+  "mask_token": "<|mask|>"
+}
