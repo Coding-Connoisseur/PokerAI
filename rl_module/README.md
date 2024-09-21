@@ -59,7 +59,29 @@ After training, use `evaluate_agent.py` to test the agent's performance:
 python evaluate_agent.py --model path/to/model --num_games 100
 ```
 
-This evaluates the model in 100 simulated games, logging key metrics like win rates, hand outcomes, and decision accuracy.
+---
+
+### Training Parameters
+
+The **training parameters** define how the reinforcement learning (RL) agents learn and adapt during gameplay. Adjusting these parameters affects the agent's behavior, convergence speed, and overall performance.
+
+#### Key Hyperparameters:
+
+- **Learning Rate (`alpha`)**: Controls how much the agent updates its Q-values after each action. Lower values lead to slower learning, while higher values can cause instability.
+- **Discount Factor (`gamma`)**: Determines how much future rewards are considered. A high `gamma` focuses on long-term rewards, while a low value prioritizes short-term gains.
+- **Exploration Rate (`epsilon`)**: Balances exploration (trying new actions) vs. exploitation (choosing known good actions). Start with a high value for more exploration, decreasing it over time.
+- **Batch Size**: For deep RL agents like DQN, this defines how many experiences are processed at once. Larger batch sizes provide more stable learning but require more memory.
+- **Target Network Update Frequency**: In DQN, the frequency of syncing the target network with the main network affects stability.
+
+#### Modifying Hyperparameters:
+
+- **Location**: Hyperparameters can be modified in the `rl_config.yaml` file in the `config/` directory.
+- **Impact**: 
+  - **Too high** a learning rate may prevent convergence, while too low can make learning extremely slow.
+  - A **low discount factor** might cause the agent to focus too much on immediate rewards, leading to suboptimal long-term strategies.
+  - **Exploration** must decrease over time for the agent to exploit learned strategies effectively.
+
+---
 
 ### Extended Explanations: Key Configurations
 
