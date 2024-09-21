@@ -1,0 +1,54 @@
+{
+  "bluff_responses": [
+    {
+      "id": 1,
+      "response": "I guess you'll need more than luck to beat this hand!",
+      "context": "AI is bluffing with a weak hand but wants to appear confident."
+    },
+    {
+      "id": 2,
+      "response": "You're going to regret staying in this one.",
+      "context": "AI is bluffing and wants to pressure opponents into folding."
+    },
+    {
+      "id": 3,
+      "response": "I’ve got this one locked down, might as well fold.",
+      "context": "AI is attempting to intimidate an opponent into folding while bluffing."
+    },
+    {
+      "id": 4,
+      "response": "Don't say I didn't warn you.",
+      "context": "AI is increasing the stakes and bluffs by showing excessive confidence."
+    },
+    {
+      "id": 5,
+      "response": "You sure you want to risk that?",
+      "context": "AI is trying to make an opponent second-guess their decision to stay in the hand."
+    },
+    {
+      "id": 6,
+      "response": "I hope you’ve got something better, because I’m ready to win.",
+      "context": "AI is subtly bluffing while pretending to have a very strong hand."
+    },
+    {
+      "id": 7,
+      "response": "I think it's time for you to fold.",
+      "context": "AI encourages folding from the opponent, attempting to appear dominant."
+    },
+    {
+      "id": 8,
+      "response": "This hand is all mine, no point in trying.",
+      "context": "AI uses bluffing tactics with a sense of finality to discourage action from opponents."
+    },
+    {
+      "id": 9,
+      "response": "You’re just throwing chips away at this point.",
+      "context": "AI is bluffing and uses a dismissive tone to make the opponent doubt their hand."
+    },
+    {
+      "id": 10,
+      "response": "Feeling lucky? Because you're going to need it.",
+      "context": "AI mixes sarcasm with bluffing to challenge the opponent's decision to continue."
+    }
+  ]
+}
