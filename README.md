@@ -1,55 +1,62 @@
-# PokerAI
+### Project Overview
 
-## Project Overview
+**PokerAI** integrates several key components to create an autonomous poker-playing AI:
+- **Reinforcement Learning (RL)**: Trains the AI to make optimal decisions using either Q-Learning or Deep Q-Networks (DQN), allowing it to improve with each game.
+- **Strategy Engine**: Provides pre-flop, post-flop, and bluffing strategies based on poker theory and opponent profiling. This ensures the AI adapts to different opponents dynamically.
+- **Browser Automation**: Uses Selenium to interact with real poker platforms by simulating clicks, bets, and navigation.
+- **NLP Chat**: Employs GPT-based natural language processing to generate conversational chat responses, making the AI more human-like during play.
 
-PokerAI is an advanced system designed to autonomously play poker using a combination of components that work together to optimize decision-making:
+These components work together to allow the AI to play poker in real time, adapting strategies based on live data, opponent behavior, and learned experiences.
 
-- **Reinforcement Learning (RL)**: The RL agent trains by playing simulated poker games, learning the best strategies through rewards and penalties.
-- **Strategy Engine**: This engine integrates game theory and real-time game state evaluations (e.g., hand strength, pot odds) to guide decision-making.
-- **Browser Automation**: Uses Selenium to interact with live poker platforms, allowing the AI to play online games in real-time.
-- **NLP Chat**: An optional feature powered by GPT to engage in human-like conversations, adding psychological tactics such as bluffing via chat.
+---
 
-## Installation
+### Installation
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/Coding-Connoisseur/PokerAI.git
-   ```
-2. Navigate to the project directory:
-   ```bash
    cd PokerAI
    ```
-3. Run the setup script to install necessary dependencies:
+
+2. Install dependencies by running the following script:
    ```bash
    bash install_dependencies.sh
    ```
-4. Configure the environment:
+
+3. Set up the environment by running:
    ```bash
    python setup_environment.py
    ```
-5. Ensure the correct browser drivers (e.g., ChromeDriver, GeckoDriver) are in place under `browser_automation/drivers`.
 
-## Running PokerAI
+4. Ensure you have the correct browser drivers (e.g., ChromeDriver) in the `/drivers` directory.
 
-1. **RL Training**: Train the reinforcement learning agent by running:
-   ```bash
-   python rl_module/train_agent.py
-   ```
-   - Configure training parameters in `config/rl_config.yaml`.
+---
 
-2. **Simulating Games**: To simulate games and evaluate agent performance:
-   ```bash
-   python rl_module/run_simulation.py --agent <agent_type>
-   ```
+### Running PokerAI
 
-3. **Real-Time Play (Browser Automation)**: Start the AI playing on a live poker platform:
-   ```bash
-   python browser_automation/start_game.py
-   ```
-   - The AI will interact with the platform, making moves based on the strategy engine.
+1. **Training the RL Agent**:
+   - Configure the RL hyperparameters in `config/rl_config.yaml`.
+   - Train the agent by running:
+     ```bash
+     python rl_module/train_agent.py
+     ```
 
-4. **NLP Chat (Optional)**: Enable AI chat interactions:
-   ```bash
-   python nlp_chat/engage_chat.py
-   ```
+2. **Simulating Poker Games**:
+   - To run a poker game simulation and test the AI’s decision-making, execute:
+     ```bash
+     python run_simulation.py
+     ```
+
+3. **Real-Time Gameplay**:
+   - Ensure browser automation is configured in `config/browser_automation_config.yaml`.
+   - Run real-time poker using browser automation:
+     ```bash
+     python browser_automation/scripts/enter_game.py
+     ```
+
+4. **NLP Chat**:
+   - Enable the NLP chat module by configuring `config/chat_config.yaml` and integrating it with the main poker game.
+
+5. **Monitoring Performance**:
+   - Use logging tools in `rl_module/metrics_logger.py` to track training and in-game performance.
 
