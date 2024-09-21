@@ -1,0 +1,38 @@
+import torch
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
+
+# Load the GPT Model Weights
+def load_gpt_model():
+    model_path = 'nlp_chat/conversation_templates/gpt_model_weights.pth'
+    
+    # Load the tokenizer and model architecture
+    tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+    model = GPT2LMHeadModel.from_pretrained('gpt2')
+
+    # Load the model weights
+    model.load_state_dict(torch.load(model_path))
+    model.eval()  # Set model to evaluation mode
+    return model, tokenizer
+
+# Generate Chat Response
+def generate_response(prompt):
+    model, tokenizer = load_gpt_model()
+    
+    # Encode the prompt and generate a response
+    inputs = tokenizer.encode(prompt, return_tensors="pt")
+    outputs = model.generate(inputs, max_length=50, num_return_sequences=1, no_repeat_ngram_size=2)
+    
+    # Decode and return the response
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    return response
+
+# Example usage: Generate response during a bluff situation
+def bluff_response():
+    prompt = "The AI just bluffed. Generate a casual message."
+    response = generate_response(prompt)
+    return response
+
+# Call in the main chat engine logic
+if __name__ == "__main__":
+    # Example conversation
+    print(bluff_response())
