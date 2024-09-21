@@ -1,57 +1,91 @@
 # Scripts Directory
 
-The `scripts` directory contains utility scripts and automation tools to simplify the setup, execution, and maintenance of the PokerAI project. These scripts handle tasks such as installation, environment setup, data processing, and running simulations. The directory is structured to help users quickly get the AI up and running, train models, and automate repetitive tasks during the development and deployment process.
+This directory contains essential utility scripts for setting up, training, and running the PokerAI. The scripts streamline tasks such as installation, environment setup, reinforcement learning training, and simulation execution. Additionally, it provides integration across the various modules of the project, including the **Strategy Engine**, **Reinforcement Learning (RL) Module**, **Browser Automation**, and **NLP Chat**.
 
 ## Directory Structure
 
-- **`install_dependencies.sh`**: A shell script for setting up the necessary dependencies for the PokerAI project. It automates the installation of required Python packages (via `pip`), system libraries, and other tools needed to run the project.
-  - **Purpose**: This script ensures that all required software, libraries, and tools are installed with the correct versions, avoiding environment-related issues.
-  - **How to Use**: Run `bash install_dependencies.sh` from the terminal to install all dependencies.
+- **`install_dependencies.sh`**: Installs required Python libraries and system dependencies.
+  - **Usage**: Run `bash install_dependencies.sh` to install all required dependencies listed in `requirements.txt`.
+  - **Components Used**: This script sets up everything from **Reinforcement Learning** to **NLP** and **Browser Automation**, linking the various systems.
 
-- **`setup_environment.py`**: A Python script that helps configure the environment needed to run PokerAI. This includes setting up directories, creating configuration files, and initializing default data files.
-  - **Purpose**: To automate the process of preparing the environment for development or production use, making it easier to switch between environments.
-  - **How to Use**: Run `python setup_environment.py` to automatically set up the environment.
+- **`setup_environment.py`**: Prepares the necessary environment for the PokerAI, creating configuration files and directories needed by various components.
+  - **Usage**: Run `python setup_environment.py` to set up all required directories and configurations.
+  - **Submodule Interaction**: Links to configuration files under the **`config`** folder, especially important for configuring **opponent profiling**.
 
-- **`run_training.sh`**: A shell script designed to automate the process of training the reinforcement learning agents. It calls the necessary Python training scripts, passing along any relevant parameters like the agent type, number of episodes, or exploration strategies.
-  - **Purpose**: To simplify the execution of RL training runs, allowing users to quickly start training their agents without having to manually configure each run.
-  - **How to Use**: Run `bash run_training.sh` to initiate the training process with default or custom settings.
+- **`run_training.sh`**: Automates the training process for the RL agent by interacting with the **RL module** and running episodes in a simulated environment.
+  - **Usage**: Run `bash run_training.sh` to start training the agent using the configuration specified in `rl_config.yaml`.
+  - **Integration**: Utilizes **`rl_module`** and **`strategy_engine`**. Reference the **`rl_module/README.md`** for RL configuration details.
 
-- **`process_hand_histories.py`**: A Python script for parsing and processing raw poker hand history files. It cleans, structures, and prepares the data for analysis or input into the RL training module.
-  - **Purpose**: To transform raw hand history data into a format suitable for training the AI or performing statistical analysis.
-  - **How to Use**: Run `python process_hand_histories.py --input <file_path>` to process hand history data.
+- **`process_hand_histories.py`**: Parses poker hand histories for analysis and training.
+  - **Usage**: Run `python process_hand_histories.py --input <file_path>` to process raw hand histories into a usable format for analysis and training.
+  - **Impact**: Provides essential data to both the **strategy engine** and **RL module** for refining strategies and improving decision-making based on past performance.
 
-- **`run_simulation.py`**: This script runs a simulation of poker games using the trained RL agents. It sets up simulated games between AI players (or against human opponents) and logs the outcomes for analysis.
-  - **Purpose**: To test the performance of the AI agents in simulated poker games and evaluate their strategies under different conditions.
-  - **How to Use**: Run `python run_simulation.py --agent <agent_type>` to start a poker simulation.
+- **`run_simulation.py`**: Executes a simulated poker game using the RL agent and strategy engine, providing real-time decision-making and interaction with a poker environment.
+  - **Usage**: Run `python run_simulation.py --agent <agent_type>` to simulate poker games and assess the agent's performance.
+  - **Key Interactions**: Pulls decision-making logic from the **strategy engine** and uses the trained RL agent to simulate real-time poker play.
 
-- **`backup_logs.sh`**: A utility script to backup the logs generated during training, evaluation, and simulations. It copies log files to a backup directory, compressing them if needed.
-  - **Purpose**: To ensure that logs from critical training and evaluation phases are not lost, providing a history of the AI’s progress.
-  - **How to Use**: Run `bash backup_logs.sh` to back up the logs.
+- **`backup_logs.sh`**: Backs up training and gameplay logs to ensure critical data is not lost.
+  - **Usage**: Run `bash backup_logs.sh` to copy and archive log files.
+  - **Real-Time Impact**: Critical for tracking the performance of various submodules (e.g., RL training logs, game outcomes).
 
-- **`evaluate_model.py`**: A Python script that runs an evaluation of the trained models against a test dataset or in simulated games. It generates key performance metrics such as win rate, average reward, and decision accuracy.
-  - **Purpose**: To assess the performance of trained models and ensure they meet desired criteria before deployment.
-  - **How to Use**: Run `python evaluate_model.py --model <model_path>` to evaluate a model.
+- **`evaluate_model.py`**: Evaluates the performance of trained RL models in a simulated or real environment by running test cases.
+  - **Usage**: Run `python evaluate_model.py --model <model_path>` to assess a trained model’s performance.
+  - **Submodule Interactions**: References the **`rl_module`** for evaluation configurations and metrics logging. This script can also be tied to **`strategy_engine`** for testing strategic refinements.
 
-## Key Usage Scenarios
+## Cross-Module Functionality
 
-1. **Setup and Installation**: 
-   - Run `install_dependencies.sh` to set up the environment.
-   - Run `setup_environment.py` to configure the environment for development or deployment.
+Each script interacts with one or more submodules. Below are key references for how these scripts integrate into the larger project:
+- **Reinforcement Learning**: The **`run_training.sh`**, **`evaluate_model.py`**, and **`run_simulation.py`** scripts directly engage with the **RL module** for training and evaluation. Refer to [rl_module/README.md](../rl_module/README.md) for more details.
+- **Strategy Engine**: Decision-making relies on the **Strategy Engine**, which processes data from **hand histories** and applies strategies during simulations. Learn more from [strategy_engine/README.md](../strategy_engine/README.md).
+- **Browser Automation**: If you're running the AI on a live platform, scripts like **`run_simulation.py`** will also interface with the **browser_automation** module to perform real-time actions. See [browser_automation/README.md](../browser_automation/README.md).
+- **NLP Chat**: When simulating interactions that require human-like communication, the **NLP Chat** engine is used in conjunction with **run_simulation.py**. Refer to [nlp_chat/README.md](../nlp_chat/README.md).
 
-2. **Training AI Models**: 
-   - Use `run_training.sh` to automate and customize training sessions for RL agents.
-   
-3. **Data Processing**: 
-   - Run `process_hand_histories.py` to clean and prepare hand history data for training or analysis.
+## Usage Examples
 
-4. **Simulations and Testing**: 
-   - Use `run_simulation.py` to simulate poker games with AI agents.
-   - Run `evaluate_model.py` to assess model performance.
+1. **Installing Dependencies**:
+   ```bash
+   bash install_dependencies.sh
+   ```
 
-5. **Backup and Maintenance**: 
-   - Use `backup_logs.sh` to regularly back up critical log data from training and simulation runs.
+2. **Setting Up the Environment**:
+   ```bash
+   python setup_environment.py
+   ```
+
+3. **Training the RL Agent**:
+   ```bash
+   bash run_training.sh
+   ```
+
+4. **Running a Simulation**:
+   ```bash
+   python run_simulation.py --agent DQN
+   ```
+
+5. **Evaluating a Trained Model**:
+   ```bash
+   python evaluate_model.py --model models/dqn_model.pth
+   ```
+
+## Future Enhancements
+
+- **Automatic Multi-Agent Support**: Modify `run_simulation.py` to support multiple agents, simulating multiplayer poker games.
+- **Extended Profiling and Testing**: Integrate automated profiling scripts that measure model performance against specific opponent types from the **opponent_profiles** module.
 
 ---
 
-This directory provides essential scripts for automation, training, and evaluation, enabling smooth development and operational workflows for the PokerAI project.
+This directory provides the core scripts required to integrate and automate various components of the PokerAI project, allowing seamless training, simulation, and deployment.
+```
 
+### Key Changes:
+1. **Cross-Referencing**:
+   - Added clear links to other modules like **RL**, **Strategy Engine**, **NLP Chat**, and **Browser Automation**.
+   - Provided direct references to related README files for more context.
+   
+2. **Detailed Documentation**:
+   - Explained each script in more detail, including how they interact with the submodules and where to find more configuration information.
+
+3. **Extended Explanations**:
+   - Provided more information about configurations, particularly for scripts like `run_training.sh`, `process_hand_histories.py`, and `evaluate_model.py`, which are critical for the system's performance.
+
+These improvements should make the `scripts` directory much clearer and better integrated with the rest of the project.
