@@ -1,0 +1,57 @@
+# model_config.yaml
+
+# General settings for the NLP model used in the PokerAI project for chat interaction.
+model:
+  name: "GPT-3"                   # Name of the model being used (e.g., GPT-3, GPT-4).
+  version: "3.0"                  # Version of the model being deployed.
+  provider: "OpenAI"              # NLP service provider, adjust based on API provider.
+  endpoint: "https://api.openai.com/v1/completions" # API endpoint for model access.
+
+# API Configuration
+api:
+  api_key: "your_openai_api_key_here"     # API key for accessing the NLP provider (replace with an actual key).
+  max_tokens: 150                         # Maximum tokens allowed per response.
+  temperature: 0.7                        # Controls randomness in responses. Lower values make responses more deterministic.
+  top_p: 1.0                              # Nucleus sampling (alternative to temperature).
+  frequency_penalty: 0.0                  # Penalizes frequent token use (controls repetitiveness).
+  presence_penalty: 0.6                   # Increases likelihood of introducing new topics in conversation.
+  timeout: 10                             # Maximum response time (in seconds) before a timeout.
+
+# Chat Response Settings
+chat_behavior:
+  bluff_threshold: 0.3                    # Probability that the AI bluffs in conversation based on game context.
+  friendly_banter: true                   # Enable friendly chat messages (banter) during play.
+  aggression_detection: true              # Detect opponent aggression and adjust responses accordingly.
+  delayed_responses:                      # Mimics natural human response delay.
+    min_delay: 2                          # Minimum response delay in seconds.
+    max_delay: 5                          # Maximum response delay in seconds.
+  strategic_responses:
+    induce_fold: true                     # Use chat to induce opponent folds.
+    confuse_opponent: true                # Use ambiguous chat to confuse opponents.
+    emotional_influence:                  # Emotional tactics based on opponent profiles.
+      aggressive_response: "You're too eager. Slow down."
+      passive_response: "You should be more aggressive. You can do it."
+
+# Logging and Monitoring
+logging:
+  enable_chat_logs: true                  # Enables logging of all chat interactions.
+  log_file: "nlp_chat/logs/chat_log.txt"  # Path for storing chat logs.
+  error_logging: true                     # Logs errors or unusual API responses.
+
+# Fallback and Failover
+fallback:
+  use_fallback_response: true             # If the NLP model fails, the system uses predefined fallback responses.
+  fallback_responses:
+    - "Let's play and see how it goes!"
+    - "Interesting hand, let's see where this goes."
+    - "You're doing well! Let's keep this up."
+    - "That's a bold move!"
+
+# Advanced NLP Features (for future expansion)
+advanced_features:
+  sentiment_analysis: true                # Analyze opponent chat to detect sentiment.
+  opponent_response_adaptation:           # Adjust chat based on opponent sentiment.
+    positive: "You're on fire today!"
+    negative: "Stay calm, it's just a game."
+    neutral: "Let's see how this unfolds."
+
