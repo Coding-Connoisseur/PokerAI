@@ -37,6 +37,28 @@ This file configures the browser behavior used by Selenium, ensuring smooth inte
 ### 5. **chat_config.yaml**
 Configures the chat behavior for bluffing and conversational interactions with opponents. The settings here define how natural the AI's responses are, contributing to its psychological strategy in poker games. It is tightly integrated with the **NLP Chat Module**.
 
+---
+
+### Multi-Table Support
+The PokerAI system supports multi-table play, allowing the AI to manage multiple games simultaneously across different browser tabs or windows. To configure multi-table play:
+
+1. **Enable Multi-Table Mode**: In the `browser_automation_config.yaml`, set `multi_table_support: true`.
+2. **Max Tables**: Adjust the `max_tables` parameter to the number of tables the AI should manage.
+3. **Tab/Window Management**: Each table will open in a new tab or window, with separate threads managing the game state and actions for each one.
+
+Ensure that your system has sufficient resources to handle multiple browser instances simultaneously.
+
+---
+
+### Error Handling and Recovery
+The PokerAI browser automation includes built-in recovery mechanisms to handle unexpected issues during gameplay:
+
+1. **Page Reloads**: If the system detects a failure in loading or interacting with the platform (e.g., unresponsive elements), the browser will automatically reload the page.
+2. **Popup Handling**: The system includes functionality to detect and close popups, such as ads or unexpected modal dialogs, using the `handle_popups.py` helper script.
+3. **Retry Logic**: If critical elements (e.g., betting buttons) are not detected within the allotted time, the AI will retry the action, using backoff logic to prevent unnecessary resource consumption.
+4. **Logging and Debugging**: All errors are logged for later debugging, and screenshots are taken before and after an error occurs for better traceability.
+
+
 ## Usage Examples
 
 ### Example 1: Modifying RL Agent Behavior
