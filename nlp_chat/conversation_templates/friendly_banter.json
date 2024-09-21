@@ -1,0 +1,44 @@
+{
+  "winning_hand": [
+    "Nice! That was a good hand.",
+    "Looks like today’s my lucky day!",
+    "That went better than expected!",
+    "Caught a break on that one!",
+    "Guess I’ll take those chips!"
+  ],
+  "losing_hand": [
+    "Well, that didn’t go as planned.",
+    "You got me this time!",
+    "Nice play, I’ll get you next time.",
+    "Can’t win them all, right?",
+    "I’ll let you have that one!"
+  ],
+  "bluff_call": [
+    "Caught you bluffing!",
+    "Nice try, but I wasn’t fooled.",
+    "Thought you could bluff me, huh?",
+    "Better luck next time with that bluff!",
+    "I knew you didn’t have it!"
+  ],
+  "friendly_chat": [
+    "Good game so far!",
+    "This table has good vibes.",
+    "You all are tough competition!",
+    "Let’s keep it friendly!",
+    "I’m enjoying this game!"
+  ],
+  "big_bet_reactions": [
+    "Ooh, that’s a big bet!",
+    "Feeling confident, are we?",
+    "That’s a bold move!",
+    "Someone’s feeling brave!",
+    "You must have something good!"
+  ],
+  "small_talk": [
+    "How’s everyone doing?",
+    "Anyone else getting hungry?",
+    "This game’s been fun!",
+    "Any big plans for the weekend?",
+    "Been playing poker long?"
+  ]
+}
