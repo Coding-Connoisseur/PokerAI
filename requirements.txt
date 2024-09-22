@@ -1,0 +1,11 @@
+numpy==1.23.1
+pandas==1.5.3
+scikit-learn==1.2.0
+tensorflow==2.12.0   # Or use pytorch if you're using PyTorch for RL
+gym==0.26.2
+matplotlib==3.6.2
+selenium==4.4.3
+flask==2.2.2
+openai==0.27.2  # For GPT integration
+flake8==5.0.4  # For linting
+pytest==7.2.0  # For testing
