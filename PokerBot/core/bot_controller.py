@@ -14,16 +14,13 @@ class BotController:
         """
         pass
 
-    def run_bot(self):
+    def run_bot(self, game_type, buy_in):
         """
-        Starts the bot, manages sessions, and controls the overall workflow.
+        Runs the poker bot with specified game type and buy-in amount.
 
-        Returns:
-            None
-
-        Logic:
-        - Initialize necessary components (AccountManager, GameSession).
-        - Start a new session, manage gameplay, and ensure payout.
+        Args:
+            game_type (str): Type of poker game.
+            buy_in (float): Buy-in amount for the game.
         """
         pass
 
