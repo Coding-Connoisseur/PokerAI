@@ -1,0 +1,9 @@
+game_parameters:
+  TexasHoldem:
+    min_buy_in: 20
+    max_buy_in: 200
+    table_limit: 9
+  Omaha:
+    min_buy_in: 30
+    max_buy_in: 300
+    table_limit: 6

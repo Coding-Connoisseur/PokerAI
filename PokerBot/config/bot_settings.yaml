@@ -1,0 +1,6 @@
+bot_settings:
+  max_sessions_per_day: 5
+  betting_strategy: "aggressive"
+  timeout_threshold: 30
+  minimum_bankroll: 50.0
+  maximum_bankroll: 1000.0

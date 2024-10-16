@@ -1,0 +1,17 @@
+{
+    "methods": [
+      {
+        "method_name": "PayPal",
+        "currency": "USD",
+        "min_payout": 50,
+        "fees": 2.5
+      },
+      {
+        "method_name": "Bank Transfer",
+        "currency": "USD",
+        "min_payout": 100,
+        "fees": 5.0
+      }
+    ]
+  }
+  
