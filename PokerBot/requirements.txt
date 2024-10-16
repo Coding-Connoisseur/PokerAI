@@ -1,1 +1,10 @@
-# requirements.txt - Main project file
+numpy
+pandas
+scikit-learn
+tensorflow
+selenium
+opencv-python
+pillow
+requests
+pyyaml
+Flask
